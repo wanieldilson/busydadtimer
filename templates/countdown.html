@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Timer</title>
+    <style>
+        /* Center the countdown timer */
+        #countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Style the countdown timer */
+        #countdown {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #333;
+            border-radius: 5px;
+            padding: 1rem;
+        }
+        
+        /* Style the buttons */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-size: 3em;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif; 
+        }
+
+        #countdown {
+            font-size: 4em;
+            margin-bottom: 0.5em;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .button {
+            background-color: #444;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .button:hover {
+            background-color: #D3D3D3;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="countdown">20:00</div>
+        <div class="button-container">
+            <div id="button-container">
+                <button id="start-button" class="button">Start</button>
+                <button id="stop-button" class="button">Stop</button>
+                <button id="reset-button" class="button">Reset</button>
+            </div>
+        </div>
+
+    <script>
+        var targetTime;
+        var remainingTime = 0;
+        var countdownInterval;
+
+        // set the target time to 20 minutes from now
+        function setTargetTime() {
+            targetTime = new Date();
+            targetTime.setMinutes(targetTime.getMinutes() + 20);
+        }
+
+        // update the countdown timer every second
+        function updateCountdown() {
+            // get the current time
+            var now = new Date();
+
+            // calculate the remaining time until the target time
+            remainingTime = targetTime.getTime() - now.getTime();
+
+            // if the remaining time is negative, clear the countdown interval
+            if (remainingTime < 0) {
+                clearInterval(countdownInterval);
+                remainingTime = 0;
+            }
+
+            // convert the remaining time to minutes and seconds
+            var minutes = Math.floor(remainingTime / (1000 * 60));
+            var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            // pad the minutes and seconds with leading zeros if necessary
+            minutes = (minutes < 10 ? '0' : '') + minutes;
+            seconds = (seconds < 10 ? '0' : '') + seconds;
+
+            // update the HTML content of the countdown timer container
+            var countdown = document.getElementById('countdown');
+            countdown.innerHTML = minutes + ':' + seconds;
+        }
+
+        // start the countdown timer
+        function startCountdown() {
+            if (!countdownInterval) {
+                setTargetTime();
+                updateCountdown();
+                countdownInterval = setInterval(updateCountdown, 1000);
+            }
+        }
+
+        // stop the countdown timer
+        function stopCountdown() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+        }
+
+        // reset the countdown timer
+        function resetCountdown() {
+            stopCountdown();
+            setTargetTime();
+            remainingTime = 0;
+            updateCountdown();
+        }
+
+        // add event listeners to the buttons
+        var startButton = document.getElementById('start-button');
+        startButton.addEventListener('click', startCountdown);
+
+        var stopButton = document.getElementById('stop-button');
+        stopButton.addEventListener('click', stopCountdown);
+
+        var resetButton = document.getElementById('reset-button');
+        resetButton.addEventListener('click', resetCountdown);
+    </script>
