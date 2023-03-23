@@ -10,4 +10,4 @@ Colour changes for work/rest periods
 
 Buttons for recording your burpees as you work out, I usually use pen and paper!
 
-<img width="1170" alt="Screenshot 2023-03-23 at 22 54 41" src="https://user-images.githubusercontent.com/68431297/227382545-3c56d443-4afb-4e34-a38d-b413ccc81252.png">
+<img width="1093" alt="Screenshot 2023-03-23 at 23 10 23" src="https://user-images.githubusercontent.com/68431297/227384410-aabee0a5-7c7c-42c4-8497-6bec78766edf.png">
